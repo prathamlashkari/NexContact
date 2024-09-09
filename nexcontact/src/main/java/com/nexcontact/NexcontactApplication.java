@@ -8,6 +8,7 @@ public class NexcontactApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(NexcontactApplication.class, args);
+		System.out.println("Server started");
 	}
 
 }
