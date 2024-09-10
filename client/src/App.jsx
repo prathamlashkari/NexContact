@@ -1,7 +1,12 @@
+import { lazy, Suspense } from "react";
+const NabBar = lazy(() => import("./component/Navbar/Navbar"));
+import "./App.css";
 function App() {
   return (
     <>
-      <div>Hello</div>
+      <Suspense fallback={<div>Loading......</div>}>
+        <NabBar />
+      </Suspense>
     </>
   );
 }
