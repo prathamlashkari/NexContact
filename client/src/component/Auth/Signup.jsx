@@ -9,6 +9,7 @@ const Signup = ({ theme }) => {
     email: "",
     password: "",
     about: "",
+    phoneNumber: "",
   });
 
   const handleChange = (e) => {
@@ -63,6 +64,17 @@ const Signup = ({ theme }) => {
               name="password"
               placeholder="Enter your password"
               value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Phone Number</label>
+            <input
+              type="text"
+              name="phoneNumber"
+              placeholder="Enter your Phone Number"
+              value={formData.phoneNumber}
               onChange={handleChange}
               required
             />
