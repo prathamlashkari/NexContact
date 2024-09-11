@@ -1,17 +1,19 @@
 .container {
   padding: 1rem;
   display: flex;
-  gap: 15rem;
+  gap: 10rem;
   flex-wrap: wrap;
   justify-content: center;
+  height: 3rem;
+  box-shadow: 0px 5px 5px #e2dada;
 }
 
-.logo-name-container{
+.logo-name-container {
   display: flex;
-  img{
+  img {
     height: 3rem;
   }
-  span{
+  span {
     margin-top: 0.3rem;
     font-size: 2rem;
     font-weight: bold;
@@ -30,24 +32,41 @@
         font-size: 1.3rem;
         text-decoration: none;
         font-weight: bold;
-        color: inherit; 
-        
+        color: inherit;
+
         &:hover {
-          color: #3498db; 
+          color: #3498db;
           cursor: pointer;
-          text-decoration: underline; 
+          text-decoration: underline;
         }
       }
     }
   }
 }
 
-
-.nav-button-button{
+.nav-button-button {
   background-color: rgb(73, 73, 252);
   border: none;
   border-radius: 10px;
   height: 2.5rem;
   font-size: 1rem;
+  margin-left: 10px;
   color: white;
+  cursor: pointer;
+}
+
+.dark-theme {
+  background: #0c0e33;
+  color: white;
+}
+
+.dark-mode-button {
+  border-radius: 27px;
+  height: 2.5rem;
+}
+.dark-border {
+border: 2px solid black;
+}
+.light-border {
+border: 2px solid rgb(254, 255, 255);
 }
