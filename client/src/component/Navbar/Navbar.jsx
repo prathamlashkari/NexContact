@@ -6,10 +6,10 @@ import NavLogo from "../../assets/NavLogo.jpg";
 import "./Navbar.css";
 
 const Navbar = ({ theme, setDark }) => {
-  const naivgate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className={`${theme ? "dark-theme" : ""} container`}>
-      <div onClick={() => naivgate("/")} className="logo-name-container">
+      <div onClick={() => navigate("/")} className="logo-name-container">
         <img src={NavLogo} alt="Logo" />
         <span>NexContact</span>
       </div>
@@ -30,8 +30,18 @@ const Navbar = ({ theme, setDark }) => {
         </ul>
       </div>
       <span>
-        <button className="nav-button-button">Login</button>
-        <button className="nav-button-button">Signup</button>
+        <button
+          onClick={() => navigate("/login")}
+          className="nav-button-button"
+        >
+          Login
+        </button>
+        <button
+          onClick={() => navigate("/signup")}
+          className="nav-button-button"
+        >
+          Signup
+        </button>
       </span>
       <span
         className={`${

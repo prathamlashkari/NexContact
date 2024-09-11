@@ -7,6 +7,8 @@ const Home = lazy(() => import("./page/Home/Home"));
 const About = lazy(() => import("./page/About/About"));
 const Service = lazy(() => import("./page/Service/Service"));
 const Contact = lazy(() => import("./page/Contact/Contact"));
+const Login = lazy(() => import("./component/Auth/Login"));
+const Signup = lazy(() => import("./component/Auth/Signup"));
 
 function App() {
   const [dark, setDark] = useState(() => {
@@ -29,6 +31,8 @@ function App() {
           <Route path={"/about"} element={<About />} />
           <Route path={"/service"} element={<Service />} />
           <Route path={"/contact"} element={<Contact />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/signup"} element={<Signup />} />
         </Routes>
       </Suspense>
     </>
