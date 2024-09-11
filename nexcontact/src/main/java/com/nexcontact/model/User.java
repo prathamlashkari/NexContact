@@ -7,6 +7,7 @@ import com.nexcontact.enums.Providers;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +29,7 @@ public class User {
 
   private Providers profider = Providers.SELF;
   private String providerUserid;
+
+  private List<String> contacts = new ArrayList<>();
+  private List<SocialLinks> socialLinks = new ArrayList<>();
 }
