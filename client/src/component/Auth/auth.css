@@ -1,0 +1,126 @@
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f3f3f3;
+}
+
+.auth-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.social-login {
+  margin-top: 20px;
+}
+
+.social-btn {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.social-btn.google {
+  background-color: #db4437;
+  color: white;
+}
+
+.social-btn.github {
+  background-color: #333;
+  color: white;
+}
+
+.social-btn svg {
+  margin-right: 8px;
+}
+
+.toggle-link {
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #1d1d1d;
+}
+
+.dark-card {
+  background-color: #2e2e2e;
+}
+
+.dark-theme .input-group input,
+.dark-theme .input-group textarea {
+  background-color: #333;
+  border: 1px solid #555;
+  color: #ddd;
+}
+
+.dark-theme .auth-btn {
+  background-color: #007bff;
+}
+
+.dark-theme .social-btn.google {
+  background-color: #db4437;
+}
+
+.dark-theme .social-btn.github {
+  background-color: white;
+  color: black;
+
+}
+
+.dark-theme .toggle-link {
+  color: #c5ddf8;
+  a{
+    color:white ;
+  }
+}

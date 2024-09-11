@@ -5,7 +5,12 @@
   flex-wrap: wrap;
   justify-content: center;
   height: 3rem;
-  box-shadow: 0px 5px 5px #e2dada;
+  box-shadow: 0px 5px 5px #393839;
+  position: sticky; 
+  top: 0; 
+  z-index: 1000;
+  background-color: white;
+  width: 100%; 
 }
 
 .logo-name-container {
@@ -56,17 +61,18 @@
 }
 
 .dark-theme {
-  background: #0c0e33;
+  background: #1d1d1d;
   color: white;
 }
 
 .dark-mode-button {
   border-radius: 27px;
   height: 2.5rem;
+  cursor: pointer;
 }
 .dark-border {
-border: 2px solid black;
+  border: 2px solid black;
 }
 .light-border {
-border: 2px solid rgb(254, 255, 255);
+  border: 2px solid rgb(254, 255, 255);
 }

@@ -31,8 +31,8 @@ function App() {
           <Route path={"/about"} element={<About />} />
           <Route path={"/service"} element={<Service />} />
           <Route path={"/contact"} element={<Contact />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/signup"} element={<Signup />} />
+          <Route path={"/login"} element={<Login theme={dark} />} />
+          <Route path={"/signup"} element={<Signup theme={dark} />} />
         </Routes>
       </Suspense>
     </>
