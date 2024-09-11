@@ -5,9 +5,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.nexcontact.enums.Providers;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Document(collection = "User")
+@NoArgsConstructor
+@Document(collection = "Users")
 public class User {
 
   private String userId;
