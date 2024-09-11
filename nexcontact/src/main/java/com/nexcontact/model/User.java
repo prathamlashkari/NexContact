@@ -1,5 +1,6 @@
 package com.nexcontact.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.nexcontact.enums.Providers;
@@ -12,7 +13,8 @@ import lombok.NoArgsConstructor;
 @Document(collection = "Users")
 public class User {
 
-  private String userId;
+  @Id
+  private String id;
   private String name;
   private String email;
   private String password;
