@@ -6,12 +6,15 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.nexcontact.enums.Role;
 import com.nexcontact.exceptions.ResourceNotFound;
 import com.nexcontact.model.User;
 import com.nexcontact.repository.UserRepository;
 import com.nexcontact.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
   @Autowired
@@ -21,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User saveUser(User user) {
+    user.getRoles().add(Role.ROLE_USER);
     return userRepository.save(user);
   }
 
