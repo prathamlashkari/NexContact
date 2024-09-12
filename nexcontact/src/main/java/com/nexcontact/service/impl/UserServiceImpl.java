@@ -49,26 +49,25 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void deleteUser(String id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+    User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found"));
+    userRepository.delete(user);
   }
 
   @Override
-  public boolean isUserExist(String userId) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isUserExist'");
+  public boolean isUserExist(String id) {
+    User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found"));
+    return user != null;
   }
 
   @Override
   public boolean isUserExistByEmail(String email) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isUserExistByEmail'");
+    User user = userRepository.findByEmail(email);
+    return user != null;
   }
 
   @Override
   public List<User> getAllUser() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAllUser'");
+    return userRepository.findAll();
   }
 
 }
