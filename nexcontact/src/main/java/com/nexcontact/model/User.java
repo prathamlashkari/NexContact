@@ -27,7 +27,7 @@ public class User {
   private boolean emailVerified = false;
   private boolean phoneVerified = false;
 
-  private Providers profider = Providers.SELF;
+  private Providers provider = Providers.SELF;
   private String providerUserid;
 
   private List<String> contacts = new ArrayList<>();

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.nexcontact.exceptions.ResourceNotFound;
 import com.nexcontact.model.User;
 import com.nexcontact.repository.UserRepository;
 import com.nexcontact.service.UserService;
@@ -29,9 +30,21 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User updateUser(User user) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
+  public User updateUser(User req) throws ResourceNotFound {
+    User user = userRepository.findById(req.getId()).orElseThrow(() -> new ResourceNotFound("User not found"));
+    user.setName(req.getName());
+    user.setEmail(req.getEmail());
+    user.setPassword(req.getPassword());
+    user.setAbout(req.getAbout());
+    user.setPhoneNumber(req.getPhoneNumber());
+    user.setProfilePic(req.getProfilePic());
+    user.setEnable(req.isEnable());
+    user.setEmailVerified(req.isEmailVerified());
+    user.setPhoneVerified(req.isPhoneVerified());
+    user.setProvider(req.getProvider());
+    user.setProviderUserid(req.getProviderUserid());
+    User savedUser = userRepository.save(user);
+    return savedUser;
   }
 
   @Override
