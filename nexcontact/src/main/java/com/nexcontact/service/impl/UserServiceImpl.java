@@ -3,21 +3,29 @@ package com.nexcontact.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.nexcontact.model.User;
+import com.nexcontact.repository.UserRepository;
 import com.nexcontact.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
+  @Autowired
+  private UserRepository userRepository;
+
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
+
   @Override
   public User saveUser(User user) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
+    return userRepository.save(user);
   }
 
   @Override
   public Optional<User> getUserById(String id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
+    return userRepository.findById(id);
   }
 
   @Override
