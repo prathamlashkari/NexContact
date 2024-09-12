@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.nexcontact.enums.Providers;
+import com.nexcontact.enums.Role;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class User {
   private String about;
   private String profilePic;
   private String phoneNumber;
-
+  private List<Role> roles = new ArrayList<>();
   private boolean enable = false;
   private boolean emailVerified = false;
   private boolean phoneVerified = false;
