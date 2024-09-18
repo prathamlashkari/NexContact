@@ -29,6 +29,7 @@ public class SercurityFilter {
     return https.build();
   }
 
+  // For cors configurations
   private CorsConfigurationSource corsConfiguration() {
     CorsConfiguration cors = new CorsConfiguration();
     cors.setAllowedHeaders(Collections.singletonList("*"));
