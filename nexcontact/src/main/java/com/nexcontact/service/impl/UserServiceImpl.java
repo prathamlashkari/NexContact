@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
     user.setProvider(req.getProvider());
     user.setProviderUserid(req.getProviderUserid());
     User savedUser = userRepository.save(user);
+    logger.info("update user ");
     return savedUser;
   }
 
