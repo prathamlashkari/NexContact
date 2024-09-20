@@ -86,6 +86,13 @@
 					<artifactId>jjwt-jackson</artifactId>
 					<version>0.11.5</version>
 				</dependency>
+				<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-client -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-oauth2-client</artifactId>
+    <version>6.3.3</version>
+</dependency>
+
 	</dependencies>
 
 	<build>
