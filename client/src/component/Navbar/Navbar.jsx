@@ -4,9 +4,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavLogo from "../../assets/NavLogo.jpg";
 import "./Navbar.css";
+import { Avatar, IconButton } from "@mui/material";
 
 const Navbar = ({ theme, setDark }) => {
   const navigate = useNavigate();
+  const user = true;
   return (
     <div className={`${theme ? "dark-theme" : ""} container`}>
       <div onClick={() => navigate("/")} className="logo-name-container">
@@ -30,18 +32,38 @@ const Navbar = ({ theme, setDark }) => {
         </ul>
       </div>
       <span>
-        <button
-          onClick={() => navigate("/login")}
-          className="nav-button-button"
-        >
-          Login
-        </button>
-        <button
-          onClick={() => navigate("/signup")}
-          className="nav-button-button"
-        >
-          Signup
-        </button>
+        {user ? (
+          <>
+            <IconButton
+              onClick={() => navigate("/user/profile")}
+              style={{ height: "1rem" }}
+            >
+              <Avatar src="https://png.pngtree.com/png-clipart/20230913/original/pngtree-profile-picture-vector-png-image_11063301.png" />
+            </IconButton>
+            <button
+              onClick={() => navigate("/logout")}
+              className="nav-button-button"
+              style={{ backgroundColor: "red" }}
+            >
+              Logout
+            </button>{" "}
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => navigate("/login")}
+              className="nav-button-button"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate("/signup")}
+              className="nav-button-button"
+            >
+              Signup
+            </button>{" "}
+          </>
+        )}
       </span>
       <span
         className={`${
@@ -53,13 +75,13 @@ const Navbar = ({ theme, setDark }) => {
           <DarkModeIcon
             style={{
               color: "black",
-              fontSize: "40px",
+              fontSize: "30px",
             }}
           />
         ) : (
           <LightModeIcon
             style={{
-              fontSize: "40px",
+              fontSize: "30px",
             }}
           />
         )}

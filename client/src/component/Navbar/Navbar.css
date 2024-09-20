@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   justify-content: center;
   height: 3rem;
-  box-shadow: 0px 5px 5px #393839;
+  box-shadow: 0px 1px 3px #393839;
   position: sticky; 
   top: 0; 
   z-index: 1000;
@@ -67,7 +67,7 @@
 
 .dark-mode-button {
   border-radius: 27px;
-  height: 2.5rem;
+  height: 2rem;
   cursor: pointer;
 }
 .dark-border {
