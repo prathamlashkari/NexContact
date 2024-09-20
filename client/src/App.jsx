@@ -9,6 +9,7 @@ const Service = lazy(() => import("./page/Service/Service"));
 const Contact = lazy(() => import("./page/Contact/Contact"));
 const Login = lazy(() => import("./component/Auth/Login"));
 const Signup = lazy(() => import("./component/Auth/Signup"));
+const Profile = lazy(() => import("./component/Profile/Profile"));
 
 function App() {
   const [dark, setDark] = useState(() => {
@@ -33,6 +34,7 @@ function App() {
           <Route path={"/contact"} element={<Contact />} />
           <Route path={"/login"} element={<Login theme={dark} />} />
           <Route path={"/signup"} element={<Signup theme={dark} />} />
+          <Route path={"/user/profile"} element={<Profile theme={dark} />} />
         </Routes>
       </Suspense>
     </>
