@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { ThemeProvider } from "./context/Theme";
 
 const NavBar = lazy(() => import("./component/Navbar/Navbar"));
 const Home = lazy(() => import("./page/Home/Home"));
@@ -12,32 +13,21 @@ const Signup = lazy(() => import("./component/Auth/Signup"));
 const Profile = lazy(() => import("./component/Profile/Profile"));
 
 function App() {
-  const [dark, setDark] = useState(() => {
-    const savedTheme = localStorage.getItem("myTheme");
-    return savedTheme === "true";
-  });
-
-  const handleChangeTheme = () => {
-    const newTheme = !dark;
-    localStorage.setItem("myTheme", newTheme);
-    setDark(newTheme);
-  };
-
   return (
-    <>
+    <ThemeProvider>
       <Suspense fallback={<div>Loading......</div>}>
-        <NavBar theme={dark} setDark={handleChangeTheme} />
+        <NavBar />
         <Routes>
-          <Route path={"/"} element={<Home theme={dark} />} />
+          <Route path={"/"} element={<Home />} />
           <Route path={"/about"} element={<About />} />
           <Route path={"/service"} element={<Service />} />
           <Route path={"/contact"} element={<Contact />} />
-          <Route path={"/login"} element={<Login theme={dark} />} />
-          <Route path={"/signup"} element={<Signup theme={dark} />} />
-          <Route path={"/user/profile"} element={<Profile theme={dark} />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/signup"} element={<Signup />} />
+          <Route path={"/user/profile"} element={<Profile />} />
         </Routes>
       </Suspense>
-    </>
+    </ThemeProvider>
   );
 }
 

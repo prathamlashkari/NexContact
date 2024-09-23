@@ -1,15 +1,17 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavLogo from "../../assets/NavLogo.jpg";
 import "./Navbar.css";
 import { Avatar, IconButton } from "@mui/material";
-const Navbar = ({ theme, setDark }) => {
+import { MyTheme } from "../../context/Theme";
+const Navbar = () => {
   const navigate = useNavigate();
+  const { dark, handleChangeTheme } = useContext(MyTheme);
   const user = true;
   return (
-    <div className={`${theme ? "dark-theme" : ""} container`}>
+    <div className={`${dark ? "dark-theme" : ""} container`}>
       <div onClick={() => navigate("/")} className="logo-name-container">
         <img src={NavLogo} alt="Logo" />
         <span>NexContact</span>
@@ -65,12 +67,10 @@ const Navbar = ({ theme, setDark }) => {
         )}
       </span>
       <span
-        className={`${
-          !theme ? "dark-border" : "light-border"
-        } dark-mode-button`}
-        onClick={setDark}
+        className={`${!dark ? "dark-border" : "light-border"} dark-mode-button`}
+        onClick={handleChangeTheme}
       >
-        {!theme ? (
+        {!dark ? (
           <DarkModeIcon
             style={{
               color: "black",

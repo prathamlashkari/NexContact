@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Profile.css";
 import { Divider, Drawer, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-const AsideBar = ({ theme, icon, text, url }) => {
+import { MyTheme } from "../../context/Theme";
+const AsideBar = ({ icon, text, url }) => {
   const navigate = useNavigate();
+  const { dark } = useContext(MyTheme);
+
   console.log(icon);
   return (
     <div onClick={() => navigate(url)}>
       <IconButton
         style={{
-          color: theme ? "white" : "black",
+          color: dark ? "white" : "black",
         }}
       >
         {icon}
