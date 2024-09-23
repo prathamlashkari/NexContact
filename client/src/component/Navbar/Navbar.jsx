@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import NavLogo from "../../assets/NavLogo.jpg";
 import "./Navbar.css";
 import { Avatar, IconButton } from "@mui/material";
-
 const Navbar = ({ theme, setDark }) => {
   const navigate = useNavigate();
   const user = true;
