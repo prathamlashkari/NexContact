@@ -1,10 +1,12 @@
 package com.nexcontact.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ContactRequest {
 
   private String name;
@@ -15,5 +17,4 @@ public class ContactRequest {
   private String description;
   private String socialLink1;
   private String socialLink2;
-  private boolean favorite = false;
 }
