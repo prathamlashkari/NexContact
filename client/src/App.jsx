@@ -2,6 +2,8 @@ import { lazy, Suspense, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { ThemeProvider } from "./context/Theme";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NavBar = lazy(() => import("./component/Navbar/Navbar"));
 const Home = lazy(() => import("./page/Home/Home"));
@@ -27,6 +29,7 @@ function App() {
           <Route path={"/user/profile/*"} element={<Profile />} />
         </Routes>
       </Suspense>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

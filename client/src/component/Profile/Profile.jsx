@@ -6,7 +6,7 @@ import { MyTheme } from "../../context/Theme.jsx";
 import { Route, Routes, useLocation } from "react-router-dom";
 const AddContact = lazy(() => import("../../page/Contact/AddContact.jsx"));
 
-const Profile = ({ theme }) => {
+const Profile = () => {
   const asideData = AsideData;
   const { dark } = useContext(MyTheme);
   const location = useLocation();
@@ -24,7 +24,7 @@ const Profile = ({ theme }) => {
           />
         ))}
       </div>
-      <div>
+      <div className="right-container">
         <Routes>
           <Route path="add-contact" element={<AddContact />} />
         </Routes>
