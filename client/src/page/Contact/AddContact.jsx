@@ -11,7 +11,7 @@ const AddContact = () => {
     email: "",
     number: "",
     description: "",
-    image: null,
+    profileImage: null,
     socialLink1: "",
     socialLink2: "",
     address: "",
@@ -37,7 +37,7 @@ const AddContact = () => {
       email: "",
       number: "",
       description: "",
-      image: null,
+      profileImage: null,
       socialLink1: "",
       socialLink2: "",
       address: "",
@@ -94,13 +94,13 @@ const AddContact = () => {
           ></textarea>
         </div>
         <div className="form-group">
-          <label htmlFor="image">Choose Image</label>
+          <label htmlFor="profileImage">Choose profileImage</label>
           <input
             type="file"
-            id="image"
-            name="image"
+            id="profileImage"
+            name="profileImage"
             onChange={handleChange}
-            accept="image/*"
+            accept="profileImage/*"
           />
         </div>
         <div className="form-group">
