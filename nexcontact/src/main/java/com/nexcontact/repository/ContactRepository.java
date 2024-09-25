@@ -8,4 +8,5 @@ import com.nexcontact.model.Contact;
 @Repository
 public interface ContactRepository extends MongoRepository<Contact, String> {
 
+  public Contact findByEmail(String email);
 }
