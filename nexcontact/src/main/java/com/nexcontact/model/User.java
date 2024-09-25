@@ -32,5 +32,4 @@ public class User {
   private String providerUserid;
 
   private List<String> contacts = new ArrayList<>();
-  private List<SocialLinks> socialLinks = new ArrayList<>();
 }
