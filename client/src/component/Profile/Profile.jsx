@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { lazy, useContext } from "react";
 import "./Profile.css";
 import AsideBar from "./AsideBar";
 import { AsideData } from "../../constant/AsideData.jsx";
 import { MyTheme } from "../../context/Theme.jsx";
+import { Route, Routes, useLocation } from "react-router-dom";
+const AddContact = lazy(() => import("../../page/Contact/AddContact.jsx"));
 
 const Profile = ({ theme }) => {
   const asideData = AsideData;
   const { dark } = useContext(MyTheme);
+  const location = useLocation();
+  console.log(location);
 
   return (
     <div className={` ${dark ? "profile-dark-theme" : ""} profile-container`}>
@@ -21,7 +25,9 @@ const Profile = ({ theme }) => {
         ))}
       </div>
       <div>
-        <h1>WellCome To profile Page</h1>
+        <Routes>
+          <Route path="add-contact" element={<AddContact />} />
+        </Routes>
       </div>
     </div>
   );
