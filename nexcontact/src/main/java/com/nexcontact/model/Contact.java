@@ -5,8 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
-import java.util.*;
-
 @Data
 @Document(collection = "Contact")
 public class Contact {
@@ -18,8 +16,9 @@ public class Contact {
   private String email;
   private String phoneNumber;
   private String address;
+  private String profileImage;
   private String description;
+  private String weblinks1;
+  private String weblinks2;
   private boolean favorite = false;
-
-  private List<String> socialLinks = new ArrayList<>();
 }
