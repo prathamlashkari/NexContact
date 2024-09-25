@@ -14,11 +14,10 @@ public class Contact {
   private String userId;
   private String name;
   private String email;
-  private String phoneNumber;
+  private String number;
   private String address;
   private String profileImage;
   private String description;
-  private String weblinks1;
-  private String weblinks2;
-  private boolean favorite = false;
+  private String socialLink1;
+  private String socialLink2;
 }

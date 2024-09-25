@@ -9,7 +9,7 @@ public class ContactRequest {
 
   private String name;
   private String email;
-  private String phoneNumber;
+  private String number;
   private String address;
   private String profileImage;
   private String description;
