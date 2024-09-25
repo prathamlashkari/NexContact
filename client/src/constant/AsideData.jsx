@@ -13,13 +13,13 @@ export const AsideData = [
   },
   {
     icon: <ViewKanbanIcon />,
-    text: "KanBan",
-    url: "kanban",
+    text: "Profile",
+    url: "profile",
   },
   {
     icon: <InboxIcon />,
-    text: "Inbox",
-    url: "inbox",
+    text: "Add Contact",
+    url: "add-contact",
   },
   {
     icon: <GroupIcon />,

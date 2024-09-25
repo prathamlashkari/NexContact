@@ -21,3 +21,7 @@
   background-color: #1d1d1d;
   color: white;
 }
+.right-container {
+  width: 100%;
+  padding: 2rem;
+}

@@ -1,0 +1,98 @@
+/* Base styles for AddContact */
+.add-contact-container {
+  padding: 20px;
+  margin: auto;
+  border-radius: 8px;
+  width: 60%;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Form heading */
+.add-contact-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form group styles */
+.add-contact-container .form-group {
+  margin-bottom: 15px;
+}
+
+/* Label styles */
+.add-contact-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input, textarea, and file input styles */
+.add-contact-container input,
+.add-contact-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-contact-container textarea {
+  resize: vertical;
+}
+
+/* Button styles */
+.add-contact-container button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.add-contact-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Light theme styles */
+.light-theme {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Dark theme styles */
+.dark-theme {
+  background-color: #333;
+  color: #f9f9f9;
+}
+.form-class {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Input and button adjustments for dark theme */
+.dark-theme input,
+.dark-theme textarea {
+  background-color: #444;
+  color: #f9f9f9;
+  border: 1px solid #555;
+}
+
+.dark-theme button {
+  background-color: #0056b3;
+}
+
+.dark-theme button:hover {
+  background-color: #003a7a;
+}
+
+/* File input styles */
+.add-contact-container input[type="file"] {
+  padding: 5px;
+}
