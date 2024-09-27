@@ -6,8 +6,6 @@ import { MyTheme } from "../../context/Theme";
 const AsideBar = ({ icon, text, url }) => {
   const navigate = useNavigate();
   const { dark } = useContext(MyTheme);
-
-  console.log(icon);
   return (
     <div onClick={() => navigate(url)}>
       <IconButton

@@ -23,8 +23,8 @@ export const AsideData = [
   },
   {
     icon: <GroupIcon />,
-    text: "Users",
-    url: "users",
+    text: "Contacts",
+    url: "contacts",
   },
   {
     icon: <ProductionQuantityLimitsIcon />,
