@@ -1,31 +1,84 @@
-import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import EditIcon from "@mui/icons-material/Edit";
+import WifiIcon from "@mui/icons-material/Wifi";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
-import { MyTheme } from "../../context/Theme";
+import { DataGrid } from "@mui/x-data-grid";
+import * as React from "react";
 import { useContext } from "react";
-
+import { MyTheme } from "../../context/Theme";
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
+    field: "name",
+    headerName: "Name",
+    width: 200,
+    renderCell: (params) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Avatar alt={params.row.firstName} src={params.row.avatar} />
+        <span style={{ marginLeft: "10px" }}>
+          {params.row.firstName} {params.row.lastName}
+        </span>
+      </div>
+    ),
+  },
+  {
+    field: "phone",
+    headerName: "Phone",
+    width: 150,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 200,
+    renderCell: (params) => (
+      <div>
+        <span style={{ display: "flex", gap: "10px" }}>
+          <div
+            style={{
+              height: "10px",
+              width: "10px",
+              backgroundColor: "#14f014",
+              marginTop: "20px",
+              borderRadius: "10px",
+            }}
+          ></div>{" "}
+          Online
+        </span>
+      </div>
+    ),
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 100,
+    renderCell: () => (
+      <IconButton color="primary">
+        <EditIcon />
+      </IconButton>
+    ),
   },
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  {
+    id: 1,
+    firstName: "Jon",
+    lastName: "Snow",
+    phone: "123-456-7890",
+    avatar: "https://via.placeholder.com/40",
+    link1: "https://twitter.com/jonsnow",
+    link2: "https://linkedin.com/in/jonsnow",
+  },
+  {
+    id: 2,
+    firstName: "Cersei",
+    lastName: "Lannister",
+    phone: "123-456-7891",
+    avatar: "https://via.placeholder.com/40",
+    link1: "https://twitter.com/cerseilannister",
+    link2: "https://linkedin.com/in/cerseilannister",
+  },
+  // Add more rows as needed
 ];
 
 const paginationModel = { page: 0, pageSize: 5 };
@@ -50,17 +103,17 @@ export default function AllContactTables() {
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
         sx={{
           border: 0,
-          "& .MuiDataGrid-cell": {
+          "& .MuiDataGrid-cell ": {
             color: dark ? "#f9f9f9" : "#333",
           },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: dark ? "#555" : "#e0e0e0",
-            color: dark ? "#fff" : "#000",
-          },
-          "& .MuiCheckbox-root": {
+          "& .MuiDataGrid-row--borderBottom css-yrdy0g-MuiDataGrid-columnHeaderRow":
+            {
+              backgroundColor: dark ? "#555" : "#e0e0e0",
+              color: dark ? "#fff" : "#000",
+            },
+          "& .MuiCheckbox-root MuiButtonBase-root": {
             color: dark ? "#f9f9f9" : "#333",
           },
         }}
