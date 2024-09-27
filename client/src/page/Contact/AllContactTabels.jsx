@@ -8,6 +8,10 @@ import * as React from "react";
 import { useContext } from "react";
 import { MyTheme } from "../../context/Theme";
 import LinkIcon from "@mui/icons-material/Link";
+import DeleteIcon from "@mui/icons-material/Delete";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+
+let theme;
 const columns = [
   {
     field: "name",
@@ -56,10 +60,20 @@ const columns = [
   {
     field: "actions",
     headerName: "Actions",
-    width: 100,
+    width: 200,
     renderCell: () => (
-      <IconButton color="primary">
+      <IconButton color={`${theme ? "primary" : "secondary"}`}>
         <EditIcon />
+        <DeleteIcon
+          style={{
+            marginLeft: "10px",
+          }}
+        />
+        <RemoveRedEyeIcon
+          style={{
+            marginLeft: "15px",
+          }}
+        />
       </IconButton>
     ),
   },
@@ -91,12 +105,12 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 export default function AllContactTables() {
   const { dark } = useContext(MyTheme);
-
+  theme = dark;
   return (
     <Paper
       sx={{
         height: 400,
-        width: "100%",
+        width: "80%",
         backgroundColor: dark ? "#333" : "#fff",
         color: dark ? "#f9f9f9" : "#333",
         boxShadow: dark
