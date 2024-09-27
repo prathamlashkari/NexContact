@@ -27,6 +27,12 @@ const columns = [
     width: 150,
   },
   {
+    field: "email",
+    headerName: "Email",
+    width: 250,
+    renderCell: (params) => <div>{params.row.email}</div>,
+  },
+  {
     field: "status",
     headerName: "Status",
     width: 200,
@@ -66,8 +72,7 @@ const rows = [
     lastName: "Snow",
     phone: "123-456-7890",
     avatar: "https://via.placeholder.com/40",
-    link1: "https://twitter.com/jonsnow",
-    link2: "https://linkedin.com/in/jonsnow",
+    email: "prathamlashkari@gamil.com",
   },
   {
     id: 2,
@@ -75,8 +80,7 @@ const rows = [
     lastName: "Lannister",
     phone: "123-456-7891",
     avatar: "https://via.placeholder.com/40",
-    link1: "https://twitter.com/cerseilannister",
-    link2: "https://linkedin.com/in/cerseilannister",
+    email: "prathamlashkari@gamil.com",
   },
   // Add more rows as needed
 ];
