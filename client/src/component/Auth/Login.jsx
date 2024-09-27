@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./auth.css";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MyTheme } from "../../context/Theme";
 
-const Login = ({ theme }) => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const { dark } = useContext(MyTheme);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,8 +21,8 @@ const Login = ({ theme }) => {
   };
 
   return (
-    <div className={`auth-container ${theme ? "dark-theme" : "light-theme"}`}>
-      <div className={`auth-card ${theme ? "dark-card" : "light-card"}`}>
+    <div className={`auth-container ${dark ? "dark-theme" : "light-dark"}`}>
+      <div className={`auth-card ${dark ? "dark-card" : "light-card"}`}>
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
