@@ -1,5 +1,5 @@
 import EditIcon from "@mui/icons-material/Edit";
-import WifiIcon from "@mui/icons-material/Wifi";
+import CallIcon from "@mui/icons-material/Call";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -7,6 +7,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import * as React from "react";
 import { useContext } from "react";
 import { MyTheme } from "../../context/Theme";
+import LinkIcon from "@mui/icons-material/Link";
 const columns = [
   {
     field: "name",
@@ -25,6 +26,12 @@ const columns = [
     field: "phone",
     headerName: "Phone",
     width: 150,
+    renderCell: (params) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <CallIcon />
+        <span style={{ marginLeft: "5px" }}>{params.row.phone}</span>
+      </div>
+    ),
   },
   {
     field: "email",
@@ -33,24 +40,17 @@ const columns = [
     renderCell: (params) => <div>{params.row.email}</div>,
   },
   {
-    field: "status",
-    headerName: "Status",
+    field: "link",
+    headerName: "Link",
     width: 200,
     renderCell: (params) => (
-      <div>
-        <span style={{ display: "flex", gap: "10px" }}>
-          <div
-            style={{
-              height: "10px",
-              width: "10px",
-              backgroundColor: "#14f014",
-              marginTop: "20px",
-              borderRadius: "10px",
-            }}
-          ></div>{" "}
-          Online
-        </span>
-      </div>
+      <span>
+        <LinkIcon
+          style={{
+            marginTop: "12px",
+          }}
+        />
+      </span>
     ),
   },
   {
@@ -73,6 +73,7 @@ const rows = [
     phone: "123-456-7890",
     avatar: "https://via.placeholder.com/40",
     email: "prathamlashkari@gamil.com",
+    link: "htts//:gmail.com",
   },
   {
     id: 2,
@@ -81,6 +82,7 @@ const rows = [
     phone: "123-456-7891",
     avatar: "https://via.placeholder.com/40",
     email: "prathamlashkari@gamil.com",
+    link: "htts//:gmail.com",
   },
   // Add more rows as needed
 ];
