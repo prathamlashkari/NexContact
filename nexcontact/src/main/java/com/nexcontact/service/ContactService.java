@@ -8,5 +8,5 @@ import com.nexcontact.request.ContactRequest;
 public interface ContactService {
   public String addContact(ContactRequest req, String jwt) throws Exception;
 
-  public List<ContactDto> getAllUserContacts(String userId) throws Exception;
+  public List<ContactDto> getAllUserContacts(String jwt) throws Exception;
 }

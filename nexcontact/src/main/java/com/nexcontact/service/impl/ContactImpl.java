@@ -1,8 +1,11 @@
 package com.nexcontact.service.impl;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nexcontact.Dto.ContactDto;
 import com.nexcontact.config.JwtProvider;
 import com.nexcontact.model.Contact;
 import com.nexcontact.model.User;
@@ -45,6 +48,27 @@ public class ContactImpl implements ContactService {
         req.getSocialLink2());
     contactRepository.save(createContact);
     return "Contact Saved succesfully";
+  }
+
+  @Override
+  public List<ContactDto> getAllUserContacts(String jwt) throws Exception {
+    String email = jwtProvider.getEmailFromToken(jwt);
+    User user = userRepository.findByEmail(email);
+    List<Contact> contacts = contactRepository.findByUserId(user.getId());
+
+    List<ContactDto> contactDtos = new ArrayList<>();
+
+    for (Contact c : contacts) {
+      ContactDto cd = new ContactDto(
+          c.getId(),
+          c.getName(),
+          c.getEmail(),
+          c.getProfileImage(),
+          c.getNumber(),
+          c.getSocialLink1());
+      contactDtos.add(cd);
+    }
+    return contactDtos;
   }
 
 }
