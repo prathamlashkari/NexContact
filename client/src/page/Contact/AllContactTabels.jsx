@@ -10,9 +10,11 @@ import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ContactModal from "../../component/Contact/ContactModal";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let theme;
-const columns = (handleEyeClick) => [
+const columns = (handleEyeClick, handleEdit, handleDelete) => [
   {
     field: "name",
     headerName: "Name",
@@ -63,7 +65,10 @@ const columns = (handleEyeClick) => [
     width: 200,
     renderCell: (params) => (
       <div>
-        <IconButton color={theme ? "primary" : "secondary"}>
+        <IconButton
+          color={theme ? "primary" : "secondary"}
+          onClick={() => handleEdit(params.row.id)}
+        >
           <EditIcon />
         </IconButton>
         <IconButton
@@ -72,7 +77,10 @@ const columns = (handleEyeClick) => [
         >
           <RemoveRedEyeIcon />
         </IconButton>
-        <IconButton color={theme ? "primary" : "secondary"}>
+        <IconButton
+          color={theme ? "primary" : "secondary"}
+          onClick={() => handleDelete(params.row.id)}
+        >
           <DeleteIcon />
         </IconButton>
       </div>
@@ -80,9 +88,9 @@ const columns = (handleEyeClick) => [
   },
 ];
 
-const rows = [
+let rows = [
   {
-    id: 1,
+    id: "dsfsdfasdfsdfsdfsdf",
     firstName: "Jon",
     lastName: "Snow",
     phone: "123-456-7890",
@@ -91,7 +99,7 @@ const rows = [
     link: "https://jonsnow.com",
   },
   {
-    id: 2,
+    id: "sdfsdfsdfsdfsdf",
     firstName: "Cersei",
     lastName: "Lannister",
     phone: "123-456-7891",
@@ -99,20 +107,32 @@ const rows = [
     email: "cersei@gamil.com",
     link: "https://cersei.com",
   },
-  // Add more rows as needed
 ];
 
 export default function AllContactTables() {
   const { dark } = useContext(MyTheme);
+  const navigate = useNavigate();
   theme = dark;
 
   const [selectedContact, setSelectedContact] = useState(null);
   const [open, setOpen] = useState(false);
 
-  // Handle eye icon click
   const handleEyeClick = (contact) => {
     setSelectedContact(contact);
     setOpen(true);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/edit-contact/${id}`);
+  };
+
+  const handleDelete = (id) => {
+    try {
+      toast.success("Contact deleted");
+      rows = rows.filter((row) => row.id !== id);
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+    }
   };
 
   return (
@@ -130,7 +150,7 @@ export default function AllContactTables() {
       >
         <DataGrid
           rows={rows}
-          columns={columns(handleEyeClick)}
+          columns={columns(handleEyeClick, handleEdit, handleDelete)}
           pageSizeOptions={[5, 10]}
           sx={{
             border: 0,
@@ -146,7 +166,6 @@ export default function AllContactTables() {
         />
       </Paper>
 
-      {/* Modal to display contact details */}
       <ContactModal open={open} setOpen={setOpen} contact={selectedContact} />
     </div>
   );
