@@ -90,4 +90,22 @@ public class ContactImpl implements ContactService {
     return cd;
   }
 
+  @Override
+  public String deleteContactById(String jwt, String contactId) throws Exception {
+    try {
+      String email = jwtProvider.getEmailFromToken(jwt);
+      User user = userRepository.findByEmail(email);
+      Optional<Contact> contact = contactRepository.findById(contactId);
+      if (!contact.isPresent()) {
+        throw new Exception("Contact not found with ID: " + contactId);
+      }
+      contactRepository.delete(contact.get());
+      user.getContacts().remove(contactId);
+      userRepository.save(user);
+      return "Contact deleted successfully";
+    } catch (Exception e) {
+      throw new Exception("Unable to delete contact: " + e.getMessage());
+    }
+  }
+
 }

@@ -10,5 +10,7 @@ public interface ContactService {
 
   public List<ContactDto> getAllUserContacts(String jwt) throws Exception;
 
-  public ContactDto getContactById(String userId) throws Exception;
+  public ContactDto getContactById(String contactId) throws Exception;
+
+  public String deleteContactById(String jwt, String contactId) throws Exception;
 }
