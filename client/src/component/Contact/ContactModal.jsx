@@ -12,12 +12,35 @@ const style = (dark) => ({
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: dark ? "#333" : "background.paper",
-  color: dark ? "#fff" : "#000",
-  border: "2px solid #000",
-  boxShadow: 24,
+  width: 450,
+  backdropFilter: "blur(15px)",
+  border: dark
+    ? "1px solid rgba(0, 0, 0, 0.2)"
+    : "1px solid rgba(0, 0, 0, 0.2)",
+  borderRadius: "20px",
+  boxShadow: "0 8px 32px rgba(0, 0, 225, 0.37)", // Depth
+  color: dark ? "#f1f1f1" : "#333",
   p: 4,
+});
+
+const avatarStyle = {
+  width: 100,
+  height: 100,
+  borderRadius: "50%",
+  border: "2px solid #fff", // Neon effect
+  boxShadow: "0px 0px 15px 5px rgba(0, 0, 225, 0.2)", // Neon glow
+  transition: "transform 0.3s ease",
+  "&:hover": {
+    transform: "scale(1.1)",
+  },
+};
+
+const fieldStyle = (dark) => ({
+  marginBottom: "1rem",
+  padding: "10px",
+  borderRadius: "12px",
+  background: dark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)",
+  color: dark ? "white" : "black",
 });
 
 export default function ContactModal({ open, setOpen, contact }) {
@@ -35,35 +58,72 @@ export default function ContactModal({ open, setOpen, contact }) {
       <Box sx={style(dark)}>
         {contact ? (
           <>
-            <Avatar
-              alt={contact.firstName}
-              src={contact.avatar}
-              sx={{ width: 80, height: 80, marginBottom: "1rem" }}
-            />
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {contact.firstName} {contact.lastName}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <strong>Email:</strong> {contact.email}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <strong>Phone:</strong> {contact.phone}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <strong>Link:</strong> <a href={contact.link}>{contact.link}</a>
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Avatar
+                alt={contact.firstName}
+                src={contact.avatar}
+                sx={avatarStyle}
+              />
+              <Typography
+                variant="h5"
+                sx={{ margin: "1rem 0", fontWeight: "bold" }}
+              >
+                {contact.firstName} {contact.lastName}
+              </Typography>
+            </Box>
+
+            <Box sx={fieldStyle(dark)}>
+              <Typography variant="body1">
+                <strong>Email:</strong> {contact.email}
+              </Typography>
+            </Box>
+
+            <Box sx={fieldStyle(dark)}>
+              <Typography variant="body1">
+                <strong>Phone:</strong> {contact.phone}
+              </Typography>
+            </Box>
+
+            <Box sx={fieldStyle(dark)}>
+              <Typography variant="body1">
+                <strong>Link:</strong>{" "}
+                <a
+                  href={contact.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: dark ? "white" : "black",
+                    marginLeft: "5px",
+                  }}
+                >
+                  {contact.link}
+                </a>
+              </Typography>
+            </Box>
+
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleClose}
+              sx={{
+                marginTop: "2rem",
+                width: "100%",
+                padding: "10px",
+                fontSize: "16px",
+              }}
+            >
+              Close
+            </Button>
           </>
         ) : (
           <Typography>No Contact Selected</Typography>
         )}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleClose}
-          sx={{ marginTop: "1rem" }}
-        >
-          Close
-        </Button>
       </Box>
     </Modal>
   );

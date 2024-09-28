@@ -111,7 +111,6 @@ export default function AllContactTables() {
 
   // Handle eye icon click
   const handleEyeClick = (contact) => {
-    console.log("cicked");
     setSelectedContact(contact);
     setOpen(true);
   };
