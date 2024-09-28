@@ -84,13 +84,13 @@
   border: 1px solid #555;
 }
 
-.dark-theme button {
+/* .dark-theme button {
   background-color: #0056b3;
 }
 
 .dark-theme button:hover {
   background-color: #003a7a;
-}
+} */
 
 /* File input styles */
 .add-contact-container input[type="file"] {
