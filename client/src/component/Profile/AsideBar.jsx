@@ -7,10 +7,16 @@ const AsideBar = ({ icon, text, url }) => {
   const navigate = useNavigate();
   const { dark } = useContext(MyTheme);
   return (
-    <div onClick={() => navigate(url)}>
+    <div
+      onClick={() => navigate(url)}
+      style={{
+        cursor: "pointer",
+      }}
+    >
       <IconButton
         style={{
           color: dark ? "white" : "black",
+          cursor: "pointer",
         }}
       >
         {icon}

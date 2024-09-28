@@ -4,15 +4,15 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
-import * as React from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { MyTheme } from "../../context/Theme";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import ContactModal from "../../component/Contact/ContactModal";
 
 let theme;
-const columns = [
+const columns = (handleEyeClick) => [
   {
     field: "name",
     headerName: "Name",
@@ -61,20 +61,21 @@ const columns = [
     field: "actions",
     headerName: "Actions",
     width: 200,
-    renderCell: () => (
-      <IconButton color={`${theme ? "primary" : "secondary"}`}>
-        <EditIcon />
-        <DeleteIcon
-          style={{
-            marginLeft: "10px",
-          }}
-        />
-        <RemoveRedEyeIcon
-          style={{
-            marginLeft: "15px",
-          }}
-        />
-      </IconButton>
+    renderCell: (params) => (
+      <div>
+        <IconButton color={theme ? "primary" : "secondary"}>
+          <EditIcon />
+        </IconButton>
+        <IconButton
+          color={theme ? "primary" : "secondary"}
+          onClick={() => handleEyeClick(params.row)}
+        >
+          <RemoveRedEyeIcon />
+        </IconButton>
+        <IconButton color={theme ? "primary" : "secondary"}>
+          <DeleteIcon />
+        </IconButton>
+      </div>
     ),
   },
 ];
@@ -86,8 +87,8 @@ const rows = [
     lastName: "Snow",
     phone: "123-456-7890",
     avatar: "https://via.placeholder.com/40",
-    email: "prathamlashkari@gamil.com",
-    link: "htts//:gmail.com",
+    email: "jonsnow@gamil.com",
+    link: "https://jonsnow.com",
   },
   {
     id: 2,
@@ -95,49 +96,59 @@ const rows = [
     lastName: "Lannister",
     phone: "123-456-7891",
     avatar: "https://via.placeholder.com/40",
-    email: "prathamlashkari@gamil.com",
-    link: "htts//:gmail.com",
+    email: "cersei@gamil.com",
+    link: "https://cersei.com",
   },
   // Add more rows as needed
 ];
 
-const paginationModel = { page: 0, pageSize: 5 };
-
 export default function AllContactTables() {
   const { dark } = useContext(MyTheme);
   theme = dark;
+
+  const [selectedContact, setSelectedContact] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  // Handle eye icon click
+  const handleEyeClick = (contact) => {
+    console.log("cicked");
+    setSelectedContact(contact);
+    setOpen(true);
+  };
+
   return (
-    <Paper
-      sx={{
-        height: 400,
-        width: "80%",
-        backgroundColor: dark ? "#333" : "#fff",
-        color: dark ? "#f9f9f9" : "#333",
-        boxShadow: dark
-          ? "0 4px 8px rgba(0, 0, 0, 0.8)"
-          : "0 4px 8px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10]}
+    <div>
+      <Paper
         sx={{
-          border: 0,
-          "& .MuiDataGrid-cell ": {
-            color: dark ? "#f9f9f9" : "#333",
-          },
-          "& .MuiDataGrid-row--borderBottom css-yrdy0g-MuiDataGrid-columnHeaderRow":
-            {
-              backgroundColor: dark ? "#555" : "#e0e0e0",
-              color: dark ? "#fff" : "#000",
-            },
-          "& .MuiCheckbox-root MuiButtonBase-root": {
-            color: dark ? "#f9f9f9" : "#333",
-          },
+          height: 400,
+          width: "80%",
+          backgroundColor: dark ? "#333" : "#fff",
+          color: dark ? "#f9f9f9" : "#333",
+          boxShadow: dark
+            ? "0 4px 8px rgba(0, 0, 0, 0.8)"
+            : "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
-      />
-    </Paper>
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns(handleEyeClick)}
+          pageSizeOptions={[5, 10]}
+          sx={{
+            border: 0,
+            "& .MuiDataGrid-cell ": {
+              color: dark ? "#f9f9f9" : "#333",
+            },
+            "& .MuiDataGrid-row--borderBottom css-yrdy0g-MuiDataGrid-columnHeaderRow":
+              {
+                backgroundColor: dark ? "#555" : "#e0e0e0",
+                color: dark ? "#fff" : "#000",
+              },
+          }}
+        />
+      </Paper>
+
+      {/* Modal to display contact details */}
+      <ContactModal open={open} setOpen={setOpen} contact={selectedContact} />
+    </div>
   );
 }
