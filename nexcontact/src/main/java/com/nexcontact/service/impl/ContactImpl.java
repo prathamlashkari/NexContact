@@ -46,7 +46,9 @@ public class ContactImpl implements ContactService {
         req.getDescription(),
         req.getSocialLink1(),
         req.getSocialLink2());
-    contactRepository.save(createContact);
+    Contact savedContact = contactRepository.save(createContact);
+    user.getContacts().add(savedContact.getId());
+    userRepository.save(user);
     return "Contact Saved succesfully";
   }
 
@@ -69,6 +71,12 @@ public class ContactImpl implements ContactService {
       contactDtos.add(cd);
     }
     return contactDtos;
+  }
+
+  @Override
+  public Contact findByUserId(String userId) throws Exception {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'findByUserId'");
   }
 
 }
