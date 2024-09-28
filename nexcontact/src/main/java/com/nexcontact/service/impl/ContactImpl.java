@@ -46,7 +46,9 @@ public class ContactImpl implements ContactService {
         req.getDescription(),
         req.getSocialLink1(),
         req.getSocialLink2());
-    contactRepository.save(createContact);
+    Contact savedContact = contactRepository.save(createContact);
+    user.getContacts().add(savedContact.getId());
+    userRepository.save(user);
     return "Contact Saved succesfully";
   }
 
@@ -69,6 +71,41 @@ public class ContactImpl implements ContactService {
       contactDtos.add(cd);
     }
     return contactDtos;
+  }
+
+  @Override
+  public ContactDto getContactById(String contactId) throws Exception {
+    Optional<Contact> contact = contactRepository.findById(contactId);
+    if (!contact.isPresent()) {
+      throw new Exception("Contact not found with ID: " + contactId);
+    }
+    Contact c = contact.get();
+    ContactDto cd = new ContactDto(
+        c.getId(),
+        c.getName(),
+        c.getEmail(),
+        c.getProfileImage(),
+        c.getNumber(),
+        c.getSocialLink1());
+    return cd;
+  }
+
+  @Override
+  public String deleteContactById(String jwt, String contactId) throws Exception {
+    try {
+      String email = jwtProvider.getEmailFromToken(jwt);
+      User user = userRepository.findByEmail(email);
+      Optional<Contact> contact = contactRepository.findById(contactId);
+      if (!contact.isPresent()) {
+        throw new Exception("Contact not found with ID: " + contactId);
+      }
+      contactRepository.delete(contact.get());
+      user.getContacts().remove(contactId);
+      userRepository.save(user);
+      return "Contact deleted successfully";
+    } catch (Exception e) {
+      throw new Exception("Unable to delete contact: " + e.getMessage());
+    }
   }
 
 }
