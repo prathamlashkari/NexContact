@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,15 @@ public class UserController {
       @PathVariable String id)
       throws Exception {
     String str = contactService.deleteContactById(jwt, id);
+    MessageResponse res = new MessageResponse(str);
+    return new ResponseEntity<>(res, HttpStatus.OK);
+  }
+
+  @PutMapping("/contact/{id}")
+  public ResponseEntity<MessageResponse> updateContactById(@RequestBody ContactRequest req,
+      @PathVariable String id)
+      throws Exception {
+    String str = contactService.updateContact(req, id);
     MessageResponse res = new MessageResponse(str);
     return new ResponseEntity<>(res, HttpStatus.OK);
   }

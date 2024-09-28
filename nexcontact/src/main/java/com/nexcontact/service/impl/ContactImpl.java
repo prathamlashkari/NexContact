@@ -108,4 +108,45 @@ public class ContactImpl implements ContactService {
     }
   }
 
+  @Override
+  public String updateContact(ContactRequest req, String contactId) throws Exception {
+    try {
+      Optional<Contact> existingContactOptional = contactRepository.findById(contactId);
+      if (!existingContactOptional.isPresent()) {
+        throw new Exception("Contact not found with ID: " + contactId);
+      }
+      Contact existingContact = existingContactOptional.get();
+      // Update fields only if they are not null
+      if (req.getName() != null) {
+        existingContact.setName(req.getName());
+      }
+      if (req.getEmail() != null) {
+        existingContact.setEmail(req.getEmail());
+      }
+      if (req.getNumber() != null) {
+        existingContact.setNumber(req.getNumber());
+      }
+      if (req.getAddress() != null) {
+        existingContact.setAddress(req.getAddress());
+      }
+      if (req.getProfileImage() != null) {
+        existingContact.setProfileImage(req.getProfileImage());
+      }
+      if (req.getDescription() != null) {
+        existingContact.setDescription(req.getDescription());
+      }
+      if (req.getSocialLink1() != null) {
+        existingContact.setSocialLink1(req.getSocialLink1());
+      }
+      if (req.getSocialLink2() != null) {
+        existingContact.setSocialLink2(req.getSocialLink2());
+      }
+      contactRepository.save(existingContact);
+
+      return "Contact updated successfully";
+    } catch (Exception e) {
+      throw new Exception("Unable to update contact: " + e.getMessage());
+    }
+  }
+
 }

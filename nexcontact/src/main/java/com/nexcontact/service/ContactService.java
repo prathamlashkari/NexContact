@@ -13,4 +13,7 @@ public interface ContactService {
   public ContactDto getContactById(String contactId) throws Exception;
 
   public String deleteContactById(String jwt, String contactId) throws Exception;
+
+  public String updateContact(ContactRequest req, String contactId) throws Exception;
+
 }
