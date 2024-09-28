@@ -1,0 +1,22 @@
+.service-container {
+  padding: 2rem;
+  height: 85vh;
+}
+
+.service-card {
+  text-align: center;
+}
+
+.service-icon {
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dark-mode .service-card {
+  background-color: #333;
+  color: white;
+}
