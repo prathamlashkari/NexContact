@@ -74,9 +74,20 @@ public class ContactImpl implements ContactService {
   }
 
   @Override
-  public Contact findByUserId(String userId) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findByUserId'");
+  public ContactDto getContactById(String contactId) throws Exception {
+    Optional<Contact> contact = contactRepository.findById(contactId);
+    if (!contact.isPresent()) {
+      throw new Exception("Contact not found with ID: " + contactId);
+    }
+    Contact c = contact.get();
+    ContactDto cd = new ContactDto(
+        c.getId(),
+        c.getName(),
+        c.getEmail(),
+        c.getProfileImage(),
+        c.getNumber(),
+        c.getSocialLink1());
+    return cd;
   }
 
 }
