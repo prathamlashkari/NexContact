@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 const Contact = () => {
   const { dark } = useContext(MyTheme);
 
-  // Form state handlers
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,13 +14,11 @@ const Contact = () => {
     message: "",
   });
 
-  // Input change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Form submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted: ", formData);
