@@ -1,19 +1,19 @@
 import React from "react";
-import { Avatar, Box, Typography, Paper, Grid } from "@mui/material";
+import { Avatar, Box, Typography, Paper, Grid2 } from "@mui/material";
 import { useContext } from "react";
 import { MyTheme } from "../../context/Theme";
+import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
   const { dark } = useContext(MyTheme);
 
-  // Sample user data (replace with your actual data)
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    about: "Software Engineer with a passion for building web applications.",
-    image: "https://via.placeholder.com/150", // Placeholder image URL
-  };
+  const {
+    name,
+    email,
+    phoneNumber,
+    about,
+    profilePic = "https://png.pngtree.com/png-clipart/20230913/original/pngtree-profile-picture-vector-png-image_11063301.png",
+  } = useSelector((store) => store.userReducer);
 
   return (
     <Paper
@@ -30,11 +30,13 @@ const ProfilePage = () => {
           : "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={4}>
+      <Grid2 container spacing={2}>
+        <Grid2 item xs={12} sm={4}>
           <Avatar
-            alt={user.name}
-            src={user.image}
+            alt={name}
+            src={
+              "https://png.pngtree.com/png-clipart/20230913/original/pngtree-profile-picture-vector-png-image_11063301.png"
+            }
             sx={{
               width: 150,
               height: 150,
@@ -44,24 +46,24 @@ const ProfilePage = () => {
                 : "0 4px 10px rgba(0, 0, 0, 0.1)",
             }}
           />
-        </Grid>
-        <Grid item xs={12} sm={8}>
+        </Grid2>
+        <Grid2 item xs={12} sm={8}>
           <Box sx={{ textAlign: "left" }}>
             <Typography variant="h4" gutterBottom>
-              {user.name}
+              {name}
             </Typography>
             <Typography variant="body1" gutterBottom>
-              <strong>Email:</strong> {user.email}
+              <strong>Email:</strong> {email}
             </Typography>
             <Typography variant="body1" gutterBottom>
-              <strong>Phone:</strong> {user.phone}
+              <strong>Phone:</strong> {phoneNumber}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              <strong>About:</strong> {user.about}
+              <strong>About:</strong> {about}
             </Typography>
           </Box>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Paper>
   );
 };

@@ -4,6 +4,9 @@ import "./App.css";
 import { ThemeProvider } from "./context/Theme";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setUser } from "./store/reducer/UserReducer";
+import { useGetUserQuery } from "./store/api/UserApi";
 
 const NavBar = lazy(() => import("./component/Navbar/Navbar"));
 const Home = lazy(() => import("./page/Home/Home"));
@@ -15,6 +18,17 @@ const Signup = lazy(() => import("./component/Auth/Signup"));
 const Profile = lazy(() => import("./component/Profile/Profile"));
 
 function App() {
+  const jwt = localStorage.getItem("jwt");
+  const dispatch = useDispatch();
+  const { data } = useGetUserQuery();
+
+  useEffect(() => {
+    if (jwt) {
+      if (data) {
+        dispatch(setUser(data));
+      }
+    }
+  }, [jwt, data, dispatch]);
   return (
     <ThemeProvider>
       <Suspense fallback={<div>Loading......</div>}>

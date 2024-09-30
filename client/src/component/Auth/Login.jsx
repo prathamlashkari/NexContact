@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = login(formData).unwrap();
+      const res = await login(formData).unwrap();
       localStorage.setItem("jwt", res.jwt);
       navigate("/user/profile");
     } catch (error) {
