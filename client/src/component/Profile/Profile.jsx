@@ -4,6 +4,7 @@ import AsideBar from "./AsideBar";
 import { AsideData } from "../../constant/AsideData.jsx";
 import { MyTheme } from "../../context/Theme.jsx";
 import { Route, Routes, useLocation } from "react-router-dom";
+import ProfilePage from "./RightSide.jsx";
 const AddContact = lazy(() => import("../../page/Contact/AddContact.jsx"));
 const AllContacts = lazy(() =>
   import("../../page/Contact/AllContactTabels.jsx")
@@ -26,6 +27,7 @@ const Profile = () => {
       </div>
       <div className="right-container">
         <Routes>
+          <Route path="" element={<ProfilePage />} />
           <Route path="add-contact" element={<AddContact />} />
           <Route path="contacts" element={<AllContacts />} />
         </Routes>

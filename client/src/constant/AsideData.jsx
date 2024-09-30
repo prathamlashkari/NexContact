@@ -1,15 +1,14 @@
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
-import InboxIcon from "@mui/icons-material/Inbox";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import GroupIcon from "@mui/icons-material/Group";
-import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
+import InboxIcon from "@mui/icons-material/Inbox";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 export const AsideData = [
   {
-    icon: <ViewKanbanIcon />,
+    icon: <EmojiPeopleIcon />,
     text: "Profile",
-    url: "profile",
+    url: "",
   },
   {
     icon: <InboxIcon />,
@@ -29,11 +28,11 @@ export const AsideData = [
   {
     icon: <LoginIcon />,
     text: "Sign In",
-    url: "signin",
+    url: "/login",
   },
   {
     icon: <LogoutIcon />,
     text: "Sign Up",
-    url: "signUp",
+    url: "/signup",
   },
 ];
