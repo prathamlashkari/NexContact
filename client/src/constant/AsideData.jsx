@@ -7,11 +7,6 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 export const AsideData = [
   {
-    icon: <DashboardIcon />,
-    text: "DashBoard",
-    url: "dashBoard",
-  },
-  {
     icon: <ViewKanbanIcon />,
     text: "Profile",
     url: "profile",
