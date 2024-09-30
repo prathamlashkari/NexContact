@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nexcontact.Dto.ContactDto;
+import com.nexcontact.model.User;
 import com.nexcontact.request.ContactRequest;
 import com.nexcontact.response.MessageResponse;
 import com.nexcontact.service.ContactService;
+import com.nexcontact.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
@@ -27,9 +29,13 @@ public class UserController {
   @Autowired
   private ContactService contactService;
 
+  @Autowired
+  private UserService userService;
+
   @GetMapping("/")
-  public ResponseEntity<String> home() {
-    return new ResponseEntity<>("Welcome to our app", HttpStatus.OK);
+  public ResponseEntity<User> getUserByToken(@RequestHeader("Authorization") String jwt) throws Exception {
+    User user = userService.getUserByEmail(jwt);
+    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
   @PostMapping("/add-contact")

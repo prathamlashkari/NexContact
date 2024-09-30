@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nexcontact.config.JwtProvider;
 import com.nexcontact.enums.Role;
 import com.nexcontact.exceptions.ResourceNotFound;
 import com.nexcontact.model.User;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private JwtProvider jwtProvider;
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -73,6 +77,16 @@ public class UserServiceImpl implements UserService {
   @Override
   public List<User> getAllUser() {
     return userRepository.findAll();
+  }
+
+  @Override
+  public User getUserByEmail(String jwt) throws Exception {
+    String email = jwtProvider.getEmailFromToken(jwt);
+    User user = userRepository.findByEmail(email);
+    if (user == null) {
+      throw new Exception("Unable to find user");
+    }
+    return user;
   }
 
 }
