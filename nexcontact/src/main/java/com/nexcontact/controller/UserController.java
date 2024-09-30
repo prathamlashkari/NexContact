@@ -35,6 +35,7 @@ public class UserController {
   @GetMapping("/")
   public ResponseEntity<User> getUserByToken(@RequestHeader("Authorization") String jwt) throws Exception {
     User user = userService.getUserByEmail(jwt);
+    user.setPassword("");
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 

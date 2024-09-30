@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import "./auth.css";
-import { FaGoogle, FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import { MyTheme } from "../../context/Theme";
+import { useLoginMutation } from "../../store/api/AuthApi";
+import "./auth.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,20 +11,28 @@ const Login = () => {
     password: "",
   });
   const { dark } = useContext(MyTheme);
+  const navigate = useNavigate();
 
+  const [login, { isLoading }] = useLoginMutation();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login form submitted:", formData);
+    try {
+      const res = login(formData).unwrap();
+      localStorage.setItem("jwt", res.jwt);
+      navigate("/user/profile");
+    } catch (error) {
+      console.error("Error is ", error);
+    }
   };
 
   return (
     <div className={`auth-container ${dark ? "dark-theme" : "light-dark"}`}>
       <div className={`auth-card ${dark ? "dark-card" : "light-card"}`}>
-        <h2>Login</h2>
+        {isLoading ? <h2>loggin in please wait......</h2> : <h2>Login</h2>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Email</label>

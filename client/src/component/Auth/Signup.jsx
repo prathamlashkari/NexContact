@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import "./auth.css";
 import { FaGoogle, FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MyTheme } from "../../context/Theme";
+import { useSignUpMutation } from "../../store/api/AuthApi";
 
 const Signup = ({ theme }) => {
   const [formData, setFormData] = useState({
@@ -13,14 +14,22 @@ const Signup = ({ theme }) => {
     phoneNumber: "",
   });
   const { dark } = useContext(MyTheme);
+  const [signup] = useSignUpMutation();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signup form submitted:", formData);
+    try {
+      const res = await signup(formData).unwrap();
+      localStorage.setItem("jwt", res.jwt);
+      navigate("/user/profile");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
