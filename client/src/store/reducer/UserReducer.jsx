@@ -27,7 +27,7 @@ export const userReducer = createSlice({
         ...action.payload,
       };
     },
-    logOut: (state) => state,
+    logOut: () => initialUser,
   },
 });
 
