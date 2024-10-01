@@ -7,8 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/reducer/UserReducer";
 import { useGetUserQuery } from "./store/api/UserApi";
+import Navbar from "./component/Navbar/Navbar";
 
-const NavBar = lazy(() => import("./component/Navbar/Navbar"));
+// const NavBar = lazy(() => import("./component/Navbar/Navbar"));
 const Home = lazy(() => import("./page/Home/Home"));
 const About = lazy(() => import("./page/About/About"));
 const Service = lazy(() => import("./page/Service/Service"));
@@ -32,7 +33,7 @@ function App() {
   return (
     <ThemeProvider>
       <Suspense fallback={<div>Loading......</div>}>
-        <NavBar />
+        <Navbar />
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/about"} element={<About />} />

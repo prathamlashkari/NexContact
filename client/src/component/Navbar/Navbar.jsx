@@ -1,15 +1,39 @@
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetUserQuery } from "../../store/api/UserApi";
+import { setUser, logOut } from "../../store/reducer/UserReducer";
+import { MyTheme } from "../../context/Theme";
+import { Avatar, IconButton } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import NavLogo from "../../assets/NavLogo.jpg";
 import "./Navbar.css";
-import { Avatar, IconButton } from "@mui/material";
-import { MyTheme } from "../../context/Theme";
+
 const Navbar = () => {
   const navigate = useNavigate();
   const { dark, handleChangeTheme } = useContext(MyTheme);
-  const user = true;
+  const dispatch = useDispatch();
+
+  const user = useSelector((store) => store.userReducer);
+  const jwt = localStorage.getItem("jwt");
+
+  const { data, isSuccess } = useGetUserQuery(undefined, {
+    skip: !!user.name,
+  });
+
+  useEffect(() => {
+    if (jwt && isSuccess && data) {
+      dispatch(setUser(data));
+    }
+  }, [jwt, data, isSuccess, dispatch]);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("jwt");
+    dispatch(logOut());
+    navigate("/");
+  };
+
   return (
     <div className={`${dark ? "dark-theme" : ""} container`}>
       <div onClick={() => navigate("/")} className="logo-name-container">
@@ -33,7 +57,7 @@ const Navbar = () => {
         </ul>
       </div>
       <span>
-        {user ? (
+        {user.name ? (
           <>
             <IconButton
               onClick={() => navigate("/user/profile")}
@@ -42,12 +66,12 @@ const Navbar = () => {
               <Avatar src="https://png.pngtree.com/png-clipart/20230913/original/pngtree-profile-picture-vector-png-image_11063301.png" />
             </IconButton>
             <button
-              onClick={() => navigate("/logout")}
+              onClick={handleLogOut}
               className="nav-button-button"
               style={{ backgroundColor: "red" }}
             >
               Logout
-            </button>{" "}
+            </button>
           </>
         ) : (
           <>
@@ -62,7 +86,7 @@ const Navbar = () => {
               className="nav-button-button"
             >
               Signup
-            </button>{" "}
+            </button>
           </>
         )}
       </span>
@@ -71,18 +95,9 @@ const Navbar = () => {
         onClick={handleChangeTheme}
       >
         {!dark ? (
-          <DarkModeIcon
-            style={{
-              color: "black",
-              fontSize: "30px",
-            }}
-          />
+          <DarkModeIcon style={{ color: "black", fontSize: "30px" }} />
         ) : (
-          <LightModeIcon
-            style={{
-              fontSize: "30px",
-            }}
-          />
+          <LightModeIcon style={{ fontSize: "30px" }} />
         )}
       </span>
     </div>
