@@ -65,7 +65,6 @@ const ProfilePage = () => {
           <Box sx={{ textAlign: "left" }}>
             <Typography variant="h4" gutterBottom>
               {name || "Loading..."}{" "}
-              {/* Display placeholder if data isn't available yet */}
             </Typography>
             <Typography variant="body1" gutterBottom>
               <strong>Email:</strong> {email || "Loading..."}
