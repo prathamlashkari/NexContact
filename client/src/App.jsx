@@ -1,13 +1,13 @@
-import { lazy, Suspense, useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import { ThemeProvider } from "./context/Theme";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { lazy, Suspense, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setUser } from "./store/reducer/UserReducer";
-import { useGetUserQuery } from "./store/api/UserApi";
+import { Route, Routes } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 import Navbar from "./component/Navbar/Navbar";
+import { MyTheme } from "./context/Theme";
+import EditContact from "./page/Contact/EditContact";
+import { useGetUserQuery } from "./store/api/UserApi";
+import { setUser } from "./store/reducer/UserReducer";
 
 // const NavBar = lazy(() => import("./component/Navbar/Navbar"));
 const Home = lazy(() => import("./page/Home/Home"));
@@ -22,6 +22,7 @@ function App() {
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
   const { data } = useGetUserQuery();
+  const { dark } = useContext(MyTheme);
 
   useEffect(() => {
     if (jwt) {
@@ -31,9 +32,14 @@ function App() {
     }
   }, [jwt, data, dispatch]);
   return (
-    <ThemeProvider>
-      <Suspense fallback={<div>Loading......</div>}>
-        <Navbar />
+    <Suspense fallback={<div>Loading......</div>}>
+      <Navbar />
+      <div
+        style={{
+          backgroundColor: dark ? "#333" : "white",
+          height: "100vh",
+        }}
+      >
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/about"} element={<About />} />
@@ -42,10 +48,10 @@ function App() {
           <Route path={"/login"} element={<Login />} />
           <Route path={"/signup"} element={<Signup />} />
           <Route path={"/user/profile/*"} element={<Profile />} />
+          <Route path={"/edit-contact/:id"} element={<EditContact />} />
         </Routes>
-      </Suspense>
-      <ToastContainer />
-    </ThemeProvider>
+      </div>
+    </Suspense>
   );
 }
 

@@ -3,10 +3,13 @@ import { MyTheme } from "../../context/Theme.jsx";
 import "./Contact.css";
 import { toast } from "react-toastify";
 import { useCreateContactMutation } from "../../store/api/UserApi.jsx";
+import { useParams } from "react-router-dom";
 
-const AddContact = () => {
+const EditContact = () => {
   const { dark } = useContext(MyTheme);
   const [createContact] = useCreateContactMutation();
+  const { id } = useParams();
+  console.log("ID is ", id);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,16 +39,16 @@ const AddContact = () => {
     } catch (error) {
       console.error(error);
     }
-    setFormData({
-      name: "",
-      email: "",
-      number: "",
-      description: "",
-      profileImage: null,
-      socialLink1: "",
-      socialLink2: "",
-      address: "",
-    });
+    // setFormData({
+    //   name: "",
+    //   email: "",
+    //   number: "",
+    //   description: "",
+    //   profileImage: null,
+    //   socialLink1: "",
+    //   socialLink2: "",
+    //   address: "",
+    // });
   };
 
   return (
@@ -137,4 +140,4 @@ const AddContact = () => {
   );
 };
 
-export default AddContact;
+export default EditContact;
