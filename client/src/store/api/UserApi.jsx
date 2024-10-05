@@ -19,7 +19,18 @@ export const userApi = createApi({
     getAllContact: builder.query({
       query: () => "/contacts",
     }),
+    createContact: builder.mutation({
+      query: (data) => ({
+        url: "/add-contact",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetUserQuery, useGetAllContactQuery } = userApi;
+export const {
+  useGetUserQuery,
+  useGetAllContactQuery,
+  useCreateContactMutation,
+} = userApi;
