@@ -19,11 +19,21 @@ export const userApi = createApi({
     getAllContact: builder.query({
       query: () => "/contacts",
     }),
+    getContactById: builder.query({
+      query: (id) => `/contact/${id}`,
+    }),
     createContact: builder.mutation({
       query: (data) => ({
         url: "/add-contact",
         method: "POST",
         body: data,
+      }),
+    }),
+    updateContact: builder.mutation({
+      query: ({ formData, id }) => ({
+        url: `/contact/${id}`,
+        method: "PUT",
+        body: formData,
       }),
     }),
   }),
@@ -33,4 +43,6 @@ export const {
   useGetUserQuery,
   useGetAllContactQuery,
   useCreateContactMutation,
+  useGetContactByIdQuery,
+  useUpdateContactMutation,
 } = userApi;

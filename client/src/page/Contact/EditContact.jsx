@@ -1,26 +1,32 @@
-import React, { useContext, useState } from "react";
-import { MyTheme } from "../../context/Theme.jsx";
-import "./Contact.css";
-import { toast } from "react-toastify";
-import { useCreateContactMutation } from "../../store/api/UserApi.jsx";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { MyTheme } from "../../context/Theme.jsx";
+import {
+  useGetContactByIdQuery,
+  useUpdateContactMutation,
+} from "../../store/api/UserApi.jsx";
+import "./Contact.css";
 
 const EditContact = () => {
   const { dark } = useContext(MyTheme);
-  const [createContact] = useCreateContactMutation();
   const { id } = useParams();
-  console.log("ID is ", id);
+  const { data } = useGetContactByIdQuery(id);
+  const [updateContact] = useUpdateContactMutation(id);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     number: "",
-    description: "",
-    profileImage:
-      "https://www.pngitem.com/pimgs/m/22-223968_default-profile-picture-circle-hd-png-download.png",
-    socialLink1: "",
-    socialLink2: "",
-    address: "",
   });
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        name: data?.name,
+        email: data?.email,
+        number: data?.phone,
+      });
+    }
+  }, [data]);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -34,28 +40,24 @@ const EditContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await createContact(formData);
-      toast.success(res.data.msg);
+      const res = await updateContact({ formData, id });
+      console.log(res);
+      toast.success(res);
     } catch (error) {
       console.error(error);
     }
-    // setFormData({
-    //   name: "",
-    //   email: "",
-    //   number: "",
-    //   description: "",
-    //   profileImage: null,
-    //   socialLink1: "",
-    //   socialLink2: "",
-    //   address: "",
-    // });
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+    });
   };
 
   return (
     <div
       className={`add-contact-container ${dark ? "dark-theme" : "light-theme"}`}
     >
-      <h2>Add Contact</h2>
+      <h2>Edit Contact</h2>
       <form className="form-class" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -90,51 +92,8 @@ const EditContact = () => {
             placeholder="Enter phone number"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="description">Contact Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter contact description"
-          ></textarea>
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="socialLink1">Social Link 1</label>
-          <input
-            type="url"
-            id="socialLink1"
-            name="socialLink1"
-            value={formData.socialLink1}
-            onChange={handleChange}
-            placeholder="Enter social link 1"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="socialLink2">Social Link 2</label>
-          <input
-            type="url"
-            id="socialLink2"
-            name="socialLink2"
-            value={formData.socialLink2}
-            onChange={handleChange}
-            placeholder="Enter social link 2"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="address">Contact Address</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            placeholder="Enter contact address"
-          />
-        </div>
-        <button type="submit">Save Contact</button>
+        <button type="submit">Save Changes</button>
       </form>
     </div>
   );

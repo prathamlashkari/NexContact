@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.nexcontact.Dto.ContactDto;
 import com.nexcontact.request.ContactRequest;
+import com.nexcontact.request.EditcontactReq;
 
 public interface ContactService {
   public String addContact(ContactRequest req, String jwt) throws Exception;
@@ -14,6 +15,6 @@ public interface ContactService {
 
   public String deleteContactById(String jwt, String contactId) throws Exception;
 
-  public String updateContact(ContactRequest req, String contactId) throws Exception;
+  public String updateContact(EditcontactReq req, String contactId) throws Exception;
 
 }
