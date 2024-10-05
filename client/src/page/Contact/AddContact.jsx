@@ -2,16 +2,18 @@ import React, { useContext, useState } from "react";
 import { MyTheme } from "../../context/Theme.jsx";
 import "./Contact.css";
 import { toast } from "react-toastify";
+import { useCreateContactMutation } from "../../store/api/UserApi.jsx";
 
 const AddContact = () => {
   const { dark } = useContext(MyTheme);
-
+  const [createContact] = useCreateContactMutation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     number: "",
     description: "",
-    profileImage: null,
+    profileImage:
+      "https://www.pngitem.com/pimgs/m/22-223968_default-profile-picture-circle-hd-png-download.png",
     socialLink1: "",
     socialLink2: "",
     address: "",
@@ -26,12 +28,14 @@ const AddContact = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-
-    toast.success("Contact Saved");
-
+    try {
+      const res = await createContact(formData);
+      toast.success(res.data.msg);
+    } catch (error) {
+      console.error(error);
+    }
     setFormData({
       name: "",
       email: "",
@@ -93,16 +97,7 @@ const AddContact = () => {
             placeholder="Enter contact description"
           ></textarea>
         </div>
-        <div className="form-group">
-          <label htmlFor="profileImage">Choose profileImage</label>
-          <input
-            type="file"
-            id="profileImage"
-            name="profileImage"
-            onChange={handleChange}
-            accept="profileImage/*"
-          />
-        </div>
+
         <div className="form-group">
           <label htmlFor="socialLink1">Social Link 1</label>
           <input

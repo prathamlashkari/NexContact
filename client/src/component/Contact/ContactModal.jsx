@@ -67,7 +67,7 @@ export default function ContactModal({ open, setOpen, contact }) {
             >
               <Avatar
                 alt={contact.firstName}
-                src={contact.avatar}
+                src={contact.profileImage}
                 sx={avatarStyle}
               />
               <Typography

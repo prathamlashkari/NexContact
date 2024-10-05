@@ -12,6 +12,7 @@ import com.nexcontact.model.User;
 import com.nexcontact.repository.ContactRepository;
 import com.nexcontact.repository.UserRepository;
 import com.nexcontact.request.ContactRequest;
+import com.nexcontact.request.EditcontactReq;
 import com.nexcontact.service.ContactService;
 
 @Service
@@ -109,14 +110,13 @@ public class ContactImpl implements ContactService {
   }
 
   @Override
-  public String updateContact(ContactRequest req, String contactId) throws Exception {
+  public String updateContact(EditcontactReq req, String contactId) throws Exception {
     try {
       Optional<Contact> existingContactOptional = contactRepository.findById(contactId);
       if (!existingContactOptional.isPresent()) {
         throw new Exception("Contact not found with ID: " + contactId);
       }
       Contact existingContact = existingContactOptional.get();
-      // Update fields only if they are not null
       if (req.getName() != null) {
         existingContact.setName(req.getName());
       }
@@ -126,21 +126,7 @@ public class ContactImpl implements ContactService {
       if (req.getNumber() != null) {
         existingContact.setNumber(req.getNumber());
       }
-      if (req.getAddress() != null) {
-        existingContact.setAddress(req.getAddress());
-      }
-      if (req.getProfileImage() != null) {
-        existingContact.setProfileImage(req.getProfileImage());
-      }
-      if (req.getDescription() != null) {
-        existingContact.setDescription(req.getDescription());
-      }
-      if (req.getSocialLink1() != null) {
-        existingContact.setSocialLink1(req.getSocialLink1());
-      }
-      if (req.getSocialLink2() != null) {
-        existingContact.setSocialLink2(req.getSocialLink2());
-      }
+
       contactRepository.save(existingContact);
 
       return "Contact updated successfully";

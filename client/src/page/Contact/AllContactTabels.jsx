@@ -4,27 +4,27 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { MyTheme } from "../../context/Theme";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ContactModal from "../../component/Contact/ContactModal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { useGetAllContactQuery } from "../../store/api/UserApi";
 
 let theme;
-const columns = (handleEyeClick, handleEdit, handleDelete) => [
+const columns = (handleEyeClick, handleEdit, handleDelete, navigate) => [
   {
     field: "name",
     headerName: "Name",
     width: 200,
     renderCell: (params) => (
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Avatar alt={params.row.firstName} src={params.row.avatar} />
-        <span style={{ marginLeft: "10px" }}>
-          {params.row.firstName} {params.row.lastName}
-        </span>
+        <Avatar alt={params.row.name} src={params.row.profileImage} />
+        <span style={{ marginLeft: "10px" }}>{params.row.name}</span>
       </div>
     ),
   },
@@ -50,13 +50,15 @@ const columns = (handleEyeClick, handleEdit, handleDelete) => [
     headerName: "Link",
     width: 200,
     renderCell: (params) => (
-      <span>
+      <Link to={params.row.link} target="_blank">
         <LinkIcon
           style={{
             marginTop: "12px",
+            color: "red",
+            cursor: "pointer",
           }}
         />
-      </span>
+      </Link>
     ),
   },
   {
@@ -88,32 +90,12 @@ const columns = (handleEyeClick, handleEdit, handleDelete) => [
   },
 ];
 
-let rows = [
-  {
-    id: "dsfsdfasdfsdfsdfsdf",
-    firstName: "Jon",
-    lastName: "Snow",
-    phone: "123-456-7890",
-    avatar: "https://via.placeholder.com/40",
-    email: "jonsnow@gamil.com",
-    link: "https://jonsnow.com",
-  },
-  {
-    id: "sdfsdfsdfsdfsdf",
-    firstName: "Cersei",
-    lastName: "Lannister",
-    phone: "123-456-7891",
-    avatar: "https://via.placeholder.com/40",
-    email: "cersei@gamil.com",
-    link: "https://cersei.com",
-  },
-];
-
 export default function AllContactTables() {
   const { dark } = useContext(MyTheme);
   const navigate = useNavigate();
   theme = dark;
-
+  const { data } = useGetAllContactQuery();
+  useEffect(() => {}, [data]);
   const [selectedContact, setSelectedContact] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -129,7 +111,6 @@ export default function AllContactTables() {
   const handleDelete = (id) => {
     try {
       toast.success("Contact deleted");
-      rows = rows.filter((row) => row.id !== id);
     } catch (error) {
       console.error("Error deleting contact:", error);
     }
@@ -149,8 +130,8 @@ export default function AllContactTables() {
         }}
       >
         <DataGrid
-          rows={rows}
-          columns={columns(handleEyeClick, handleEdit, handleDelete)}
+          rows={data}
+          columns={columns(handleEyeClick, handleEdit, handleDelete, navigate)}
           pageSizeOptions={[5, 10]}
           sx={{
             border: 0,

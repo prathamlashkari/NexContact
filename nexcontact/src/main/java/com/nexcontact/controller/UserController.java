@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nexcontact.Dto.ContactDto;
 import com.nexcontact.model.User;
 import com.nexcontact.request.ContactRequest;
+import com.nexcontact.request.EditcontactReq;
 import com.nexcontact.response.MessageResponse;
 import com.nexcontact.service.ContactService;
 import com.nexcontact.service.UserService;
@@ -71,7 +72,7 @@ public class UserController {
   }
 
   @PutMapping("/contact/{id}")
-  public ResponseEntity<MessageResponse> updateContactById(@RequestBody ContactRequest req,
+  public ResponseEntity<MessageResponse> updateContactById(@RequestBody EditcontactReq req,
       @PathVariable String id)
       throws Exception {
     String str = contactService.updateContact(req, id);
