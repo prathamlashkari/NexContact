@@ -16,7 +16,10 @@ export const userApi = createApi({
     getUser: builder.query({
       query: () => "/",
     }),
+    getAllContact: builder.query({
+      query: () => "/contacts",
+    }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery, useGetAllContactQuery } = userApi;
