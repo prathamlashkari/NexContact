@@ -13,10 +13,13 @@ import ContactModal from "../../component/Contact/ContactModal";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { useGetAllContactQuery } from "../../store/api/UserApi";
+import {
+  useDeleteContactMutation,
+  useGetAllContactQuery,
+} from "../../store/api/UserApi";
 
 let theme;
-const columns = (handleEyeClick, handleEdit, handleDelete, navigate) => [
+const columns = (handleEyeClick, handleEdit, handleDelete) => [
   {
     field: "name",
     headerName: "Name",
@@ -95,6 +98,7 @@ export default function AllContactTables() {
   const navigate = useNavigate();
   theme = dark;
   const { data } = useGetAllContactQuery();
+  const [deleteContact] = useDeleteContactMutation();
   useEffect(() => {}, [data]);
   const [selectedContact, setSelectedContact] = useState(null);
   const [open, setOpen] = useState(false);
@@ -108,9 +112,14 @@ export default function AllContactTables() {
     navigate(`/edit-contact/${id}`);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     try {
-      toast.success("Contact deleted");
+      try {
+        const res = await deleteContact(id);
+        // toast.success(res.data.msg);
+      } catch (error) {
+        // toast.error(error);
+      }
     } catch (error) {
       console.error("Error deleting contact:", error);
     }
